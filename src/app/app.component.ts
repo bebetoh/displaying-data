@@ -8,10 +8,11 @@ import { Hero } from './hero/hero';
 })
 
 export class AppComponent {
-  
+
   title: string;
   myHero: Hero;
   heroes: Hero[];
+  isUnchanged : boolean;
 
   constructor() {
     this.title = 'Tour of Heroes';
@@ -22,5 +23,9 @@ export class AppComponent {
                   new Hero(20, 'Tornado'),
                   new Hero(25, 'Teste')];
     this.myHero = this.heroes[1];
+    this.isUnchanged = false;
+  }
+  getVal(){
+    return 8;
   }
 }

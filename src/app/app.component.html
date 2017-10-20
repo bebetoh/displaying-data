@@ -6,3 +6,11 @@
     {{hero.name}}
   </li>
 </ul>
+<p *ngIf="heroes.length > 3">There are many heroes, {{ heroes.length }}!</p>
+
+<p>The sum of 1 + 1 is {{1 + 1}}</p>
+<!-- "The sum of 1 + 1 is not 4" -->
+<p>The sum of 1 + 1 is not {{1 + 1 + getVal()}}</p>
+
+{{title}}
+<span [hidden]="isUnchanged">changed</span>
