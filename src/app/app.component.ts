@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core'
 import { Hero } from './hero/hero';
 
 @Component({
@@ -28,4 +28,22 @@ export class AppComponent {
   getVal(){
     return 8;
   }
+  fontSizePx = 16;
+
+  testex = 20;
+
+
+ isSpecial = true;
+ canSave = true;
+
+
+  currentClasses: {};
+setCurrentClasses() {
+  // CSS classes: added/removed per current state of component properties
+  this.currentClasses =  {
+    'saveable': this.canSave,
+    'modified': !this.isUnchanged,
+    'special' :  this.isSpecial
+  };
+}
 }

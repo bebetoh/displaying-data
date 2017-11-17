@@ -14,3 +14,33 @@
 
 {{title}}
 <span [hidden]="isUnchanged">changed</span>
+
+
+<a class="to-toc" href="#toc">top</a>
+
+<hr>
+<h2 id="two-way">Two-way Binding</h2>
+<div id="two-way-1">
+  <app-sizer [(size)]="fontSizePx"></app-sizer>
+  <div [style.font-size.px]="fontSizePx">Resizable Text</div>
+   <label>FontSize (px): <input [(ngModel)]="fontSizePx"></label>
+</div>
+<br>
+
+<hr>
+<div [class.special]="isSpecial">The class binding is special</div>
+
+<hr>
+<p>currentClasses is {{currentClasses | json}}</p>
+<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
+<br>
+<label>saveable   <input type="checkbox" [(ngModel)]="canSave"></label> |
+<label>modified:  <input type="checkbox" [value]="!isUnchanged" (change)="isUnchanged=!isUnchanged"></label> |
+<label>special:   <input type="checkbox" [(ngModel)]="isSpecial"></label>
+<button (click)="setCurrentClasses()">Refresh currentClasses</button>
+<br><br>
+<div [ngClass]="currentClasses">
+  This div should be {{ canSave ? "": "not"}} saveable,
+                  {{ isUnchanged ? "unchanged" : "modified" }} and,
+                  {{ isSpecial ? "": "not"}} special after clicking "Refresh".</div>
+<br><br>
