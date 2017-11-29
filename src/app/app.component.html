@@ -97,3 +97,23 @@ bindon-ngModel
 (ngModelChange)="setUppercaseName($event)"
 
 <a class="to-toc" href="#toc">top</a>
+
+<hr>
+
+<!-- isSpecial is true -->
+<div [class.hidden]="!isSpecial">Show with class</div>
+<div [class.hidden]="isSpecial">Hide with class</div>
+
+<!-- HeroDetail is in the DOM but hidden -->
+
+
+<hr>
+<br>
+<div [style.display]="isSpecial ? 'block' : 'none'">Show with style</div>
+<div [style.display]="isSpecial ? 'none'  : 'block'">Hide with style</div>
+
+<br>
+
+<hr>
+<div *ngIf="currentHero">Hello, {{currentHero.name}}</div>
+<div *ngIf="nullHero">Hello, {{nullHero.name}}</div>

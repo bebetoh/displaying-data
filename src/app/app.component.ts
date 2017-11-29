@@ -57,10 +57,12 @@ export class AppComponent {
     };
   }
 
-  currentHero= new Hero(20, '');
+  currentHero= new Hero(20, 'oBAAA');
 
   setUppercaseName(name: string) {
       this.currentHero.name = name.toUpperCase();
   }
+
+
 
 }
