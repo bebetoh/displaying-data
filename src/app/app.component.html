@@ -65,6 +65,7 @@
                   {{ isSpecial ? "extra large": "normal size"}} after clicking "Refresh".</div>
 
 
+
 <br><br>
 
 <a class="to-toc" href="#toc">top</a>
@@ -117,3 +118,37 @@ bindon-ngModel
 <hr>
 <div *ngIf="currentHero">Hello, {{currentHero.name}}</div>
 <div *ngIf="nullHero">Hello, {{nullHero.name}}</div>
+
+<br>
+<!-- NgFor binding -->
+<hr>
+
+<h2 id="ngFor">NgFor Binding</h2>
+
+<div class="box" >
+  <div *ngFor="let hero of heroes">{{hero.name}}</div>
+</div>
+<br>
+
+<div class="box">
+  <app-hero-detail *ngFor="let hero of heroes" [hero]="hero"></app-hero-detail>
+</div>
+
+<br>
+<h4 id="ngFor-index">*ngFor with index</h4>
+<p>with <i>semi-colon</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes; let i=index">{{i + 1}} - {{hero.name}}</div>
+</div>
+
+<p>with <i>comma</i> separator</p>
+<div class="box">
+  <!-- Ex: "1 - Hercules" -->
+  <div *ngFor="let hero of heroes, let i=index">{{i + 1}} - {{hero.name}}</div>
+</div>
+
+
+
+
+<br>
+<hr>

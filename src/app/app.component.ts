@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core'
 import { Hero } from './hero/hero';
 
+
 @Component({
   selector: 'my-app',
   templateUrl: '/app.component.html',
@@ -35,6 +36,7 @@ export class AppComponent {
 
   isSpecial = true;
   canSave = true;
+
 
 
   currentClasses: {};
