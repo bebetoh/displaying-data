@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { SizerComponent } from './sizer/sizer.component';
 import { BigHeroDetailComponent, HeroDetailComponent } from './hero/hero-detail.component';
 
+import { heroSwitchComponents }   from './hero/hero-switch.components';
+
 
 
 @NgModule({
@@ -13,7 +15,8 @@ import { BigHeroDetailComponent, HeroDetailComponent } from './hero/hero-detail.
     AppComponent,
     SizerComponent,
     BigHeroDetailComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    heroSwitchComponents
   ],
   imports: [
     BrowserModule,

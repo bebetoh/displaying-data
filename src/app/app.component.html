@@ -147,8 +147,75 @@ bindon-ngModel
   <div *ngFor="let hero of heroes, let i=index">{{i + 1}} - {{hero.name}}</div>
 </div>
 
+<br>
+<hr>
 
+<h4 id="ngFor-trackBy">*ngFor trackBy</h4>
+<button (click)="resetHeroes()">Reset heroes</button>
+<button (click)="changeIds()">Change ids</button>
+<button (click)="clearTrackByCounts()">Clear counts</button>
+
+<p><i>without</i> trackBy</p>
+<div class="box">
+  <div #noTrackBy *ngFor="let hero of heroes">({{hero.id}}) {{hero.name}}</div>
+
+  <div id="noTrackByCnt" *ngIf="heroesNoTrackByCount" >
+    Hero DOM elements change #{{heroesNoTrackByCount}} without trackBy
+  </div>
+</div>
+
+<p>with trackBy</p>
+<div class="box">
+  <div #withTrackBy *ngFor="let hero of heroes; trackBy: trackByHeroes">({{hero.id}}) {{hero.name}}</div>
+
+  <div id="withTrackByCnt" *ngIf="heroesWithTrackByCount">
+    Hero DOM elements change #{{heroesWithTrackByCount}} with trackBy
+  </div>
+</div>
+
+<br><br><br>
+
+<p>with trackBy and <i>semi-colon</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes; trackBy: trackByHeroes">
+    ({{hero.id}}) {{hero.name}}
+  </div>
+</div>
+
+<p>with trackBy and <i>comma</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes, trackBy: trackByHeroes">({{hero.id}}) {{hero.name}}</div>
+</div>
+
+<p>with trackBy and <i>space</i> separator</p>
+<div class="box">
+  <div *ngFor="let hero of heroes trackBy: trackByHeroes">({{hero.id}}) {{hero.name}}</div>
+</div>
+
+<p>with <i>generic</i> trackById function</p>
+<div class="box">
+  <div *ngFor="let hero of heroes, trackBy: trackById">({{hero.id}}) {{hero.name}}</div>
+</div>
 
 
 <br>
 <hr>
+<!-- NgSwitch binding -->
+<hr><h2 id="ngSwitch">NgSwitch Binding</h2>
+
+<p>Pick your favorite hero</p>
+<div>
+  <label *ngFor="let h of heroes">
+    <input type="radio" name="heroes" [(ngModel)]="currentHero" [value]="h">{{h.name}}
+  </label>
+</div>
+
+<div [ngSwitch]="currentHero.emotion">
+  <app-happy-hero    *ngSwitchCase="'happy'"    [hero]="currentHero"></app-happy-hero>
+  <app-sad-hero      *ngSwitchCase="'sad'"      [hero]="currentHero"></app-sad-hero>
+  <app-confused-hero *ngSwitchCase="'confused'" [hero]="currentHero"></app-confused-hero>
+  <div *ngSwitchCase="'confused'">Are you as confused as {{currentHero.name}}?</div>
+  <app-unknown-hero  *ngSwitchDefault           [hero]="currentHero"></app-unknown-hero>
+</div>
+
+<br>

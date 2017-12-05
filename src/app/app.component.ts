@@ -12,23 +12,49 @@ export class AppComponent {
 
   title: string;
   myHero: Hero;
+  hero: Hero;
   heroes: Hero[];
   isUnchanged : boolean;
+  currentHero: Hero;
+
 
   constructor() {
     this.title = 'Tour of Heroes';
     //this.myHero = 'Windstorm';
+    /*
     this.heroes = [new Hero(1, 'Windstorm'),
     new Hero(13, 'Bombasto'),
     new Hero(15, 'Magneta'),
     new Hero(20, 'Tornado'),
     new Hero(25, 'Teste')];
-    this.myHero = this.heroes[1];
+    this.myHero = this.heroes[1];*/
+    this.heroes = Hero.heroes.map(hero => hero.clone());
     this.isUnchanged = false;
   }
+
+
+  ngOnInit() {
+    this.resetHeroes();
+    this.setCurrentClasses();
+    this.setCurrentStyles();
+  }
+
+
+
   getVal(){
     return 8;
   }
+
+  ngAfterViewInit() {
+    // Detect effects of NgForTrackBy
+    trackChanges(this.heroesNoTrackBy,   () => this.heroesNoTrackByCount++);
+    trackChanges(this.heroesWithTrackBy, () => this.heroesWithTrackByCount++);
+  }
+
+  @ViewChildren('noTrackBy')   heroesNoTrackBy:   QueryList<ElementRef>;
+  @ViewChildren('withTrackBy') heroesWithTrackBy: QueryList<ElementRef>;
+
+
   fontSizePx = 16;
 
   testex = 20;
@@ -36,6 +62,14 @@ export class AppComponent {
 
   isSpecial = true;
   canSave = true;
+
+  // trackBy change counting
+  heroesNoTrackByCount   = 0;
+  heroesWithTrackByCount = 0;
+  heroesWithTrackByCountReset = 0;
+
+  heroIdIncrement = 1;
+
 
 
 
@@ -59,12 +93,55 @@ export class AppComponent {
     };
   }
 
-  currentHero= new Hero(20, 'oBAAA');
+
 
   setUppercaseName(name: string) {
       this.currentHero.name = name.toUpperCase();
   }
 
+  // updates with fresh set of cloned heroes
+  resetHeroes() {
+    this.heroes = Hero.heroes.map(hero => hero.clone());
+    this.currentHero = this.heroes[0];
+    this.hero = this.currentHero;
+    this.heroesWithTrackByCountReset = 0;
+  }
+
+  changeIds() {
+    this.resetHeroes();
+    this.heroes.forEach(h => h.id += 10 * this.heroIdIncrement++);
+    this.heroesWithTrackByCountReset = -1;
+  }
+
+  clearTrackByCounts() {
+    const trackByCountReset = this.heroesWithTrackByCountReset;
+    this.resetHeroes();
+    this.heroesNoTrackByCount = -1;
+    this.heroesWithTrackByCount = trackByCountReset;
+    this.heroIdIncrement = 1;
+  }
+
+  trackByHeroes(index: number, hero: Hero): number { return hero.id; }
+
+  trackById(index: number, item: any): number { return item['id']; }
 
 
 }
+
+
+// helper to track changes to viewChildren
+//trackChanges(this.heroesNoTrackBy,   () => this.heroesNoTrackByCount++);
+function trackChanges(views: QueryList<ElementRef>, changed: () => void) {
+  let oldRefs = views.toArray();
+  views.changes.subscribe((changes: QueryList<ElementRef>) => {
+    const changedRefs = changes.toArray();
+    // Check if every changed Element is the same as old and in the same position
+    const isSame = oldRefs.every((v, i) => v.nativeElement === changedRefs[i].nativeElement);
+    if (!isSame) {
+      oldRefs = changedRefs;
+      // wait a tick because called after views are constructed
+      setTimeout(changed, 0);
+    }
+  });
+}
+
