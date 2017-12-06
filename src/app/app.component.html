@@ -201,7 +201,7 @@ bindon-ngModel
 <br>
 <hr>
 <!-- NgSwitch binding -->
-<hr><h2 id="ngSwitch">NgSwitch Binding</h2>
+<h2 id="ngSwitch">NgSwitch Binding</h2>
 
 <p>Pick your favorite hero</p>
 <div>
@@ -219,3 +219,26 @@ bindon-ngModel
 </div>
 
 <br>
+
+
+<!-- template reference variable -->
+<hr><h2 id="ref-vars">Template reference variables</h2>
+
+<input #phone placeholder="phone number">
+
+<!-- lots of other elements -->
+
+<!-- phone refers to the input element; pass its `value` to an event handler -->
+<button (click)="callPhone(phone.value)">Call</button>
+
+<input ref-fax placeholder="fax number">
+<button (click)="callFax(fax.value)">Fax</button>
+
+<!-- btn refers to the button element; show its disabled state -->
+<button #btn disabled [innerHTML]="'disabled by attribute: '+btn.disabled"> </button>
+
+<br>
+
+<hr>
+<h4>Example Form</h4>
+<app-hero-form [hero]="currentHero"></app-hero-form>

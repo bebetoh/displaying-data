@@ -27,17 +27,21 @@ export class AppComponent {
     new Hero(15, 'Magneta'),
     new Hero(20, 'Tornado'),
     new Hero(25, 'Teste')];
-    this.myHero = this.heroes[1];*/
+    this.myHero = this.heroes[1]; */
     this.heroes = Hero.heroes.map(hero => hero.clone());
     this.isUnchanged = false;
   }
 
-
   ngOnInit() {
+
+
     this.resetHeroes();
     this.setCurrentClasses();
     this.setCurrentStyles();
+
+    this.myHero = this.currentHero;
   }
+
 
 
 
@@ -54,8 +58,15 @@ export class AppComponent {
   @ViewChildren('noTrackBy')   heroesNoTrackBy:   QueryList<ElementRef>;
   @ViewChildren('withTrackBy') heroesWithTrackBy: QueryList<ElementRef>;
 
+  alert(msg?: string)      { window.alert(msg); }
+  callFax(value: string)   { this.alert(`Faxing ${value} ...`); }
+  callPhone(value: string) { this.alert(`Calling ${value} ...`); }
 
-  fontSizePx = 16;
+
+
+
+
+   fontSizePx = 16;
 
   testex = 20;
 

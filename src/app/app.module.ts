@@ -8,6 +8,8 @@ import { BigHeroDetailComponent, HeroDetailComponent } from './hero/hero-detail.
 
 import { heroSwitchComponents }   from './hero/hero-switch.components';
 
+import { HeroFormComponent }  from './hero/hero-form.component';
+
 
 
 @NgModule({
@@ -16,7 +18,8 @@ import { heroSwitchComponents }   from './hero/hero-switch.components';
     SizerComponent,
     BigHeroDetailComponent,
     HeroDetailComponent,
-    heroSwitchComponents
+    heroSwitchComponents,
+    HeroFormComponent
   ],
   imports: [
     BrowserModule,
