@@ -17,7 +17,7 @@ export class HeroFormComponent {
 
   private _submitMessage = '';
 
-  get submitMessage() {
+  get submitMessagee() {
     if (!this.form.valid) {
       this._submitMessage = '';
     }
@@ -25,6 +25,9 @@ export class HeroFormComponent {
   }
 
   onSubmit(form: NgForm) {
+    console.log(JSON.stringify(form.value));
+    console.log("=-=-=-=-=-=-=");
+    console.log(form.value);
     this._submitMessage =  'Submitted. form value is ' + JSON.stringify(form.value);
   }
 }
