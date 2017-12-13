@@ -137,6 +137,13 @@ export class AppComponent {
   trackById(index: number, item: any): number { return item['id']; }
 
 
+  onSave(event: KeyboardEvent) {
+    let evtMsg = event ? ' Event target is ' + (<HTMLElement>event.target).textContent : '';
+    this.alert('Saved.' + evtMsg);
+    if (event) { event.stopPropagation(); }
+  }
+
+
 }
 
 
