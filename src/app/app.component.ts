@@ -143,6 +143,11 @@ export class AppComponent {
     if (event) { event.stopPropagation(); }
   }
 
+  deleteHero(hero: Hero) {
+    this.alert(`Delete ${hero ? hero.name : 'the hero'}.`);
+  }
+
+  iconUrl = 'assets/images/ng-logo.base64.png';
 
 }
 
